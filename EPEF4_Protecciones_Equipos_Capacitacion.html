@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capacitación EPEF N°4 – Protecciones de Equipos | Mantoverde</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f0ede8;color:#1c1c1c}
+  header{background:#CC4E10;color:#fff;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+  header h1{font-size:1.05rem;font-weight:600;letter-spacing:.5px}
+  header span{font-size:.8rem;opacity:.85}
+  .hero{background:#1c1c1c;color:#fff;padding:3rem 2rem 2.5rem;text-align:center}
+  .hero .badge{display:inline-block;background:rgba(204,78,16,.25);border:1px solid #CC4E10;color:#ffb38a;font-size:.75rem;letter-spacing:2px;padding:4px 14px;border-radius:20px;margin-bottom:1rem}
+  .hero h2{font-size:2.6rem;font-weight:700;line-height:1.15}
+  .hero h2 span{color:#CC4E10}
+  .hero p{margin-top:.75rem;color:#aaa;font-size:1rem}
+  .hero-meta{margin-top:1.5rem;display:flex;justify-content:center;gap:2rem;flex-wrap:wrap}
+  .hero-meta .num{font-size:2rem;font-weight:700;color:#CC4E10}
+  .hero-meta .lbl{font-size:.75rem;color:#888;margin-top:2px}
+  nav.tabs{background:#fff;border-bottom:2px solid #e8e4de;display:flex;overflow-x:auto;position:sticky;top:57px;z-index:99}
+  nav.tabs button{flex-shrink:0;background:none;border:none;padding:.85rem 1.4rem;font-size:.88rem;cursor:pointer;color:#6b6b6b;font-weight:500;border-bottom:3px solid transparent;transition:all .15s;white-space:nowrap}
+  nav.tabs button.active{color:#CC4E10;border-bottom-color:#CC4E10}
+  nav.tabs button:hover:not(.active){color:#1c1c1c;background:#faf8f5}
+  .section{display:none;max-width:960px;margin:2rem auto;padding:0 1.5rem 4rem}
+  .section.show{display:block}
+  .card{background:#fff;border-radius:12px;border:1px solid #e8e4de;margin-bottom:1.25rem;overflow:hidden}
+  .card-header{background:#1c1c1c;color:#fff;padding:.75rem 1.25rem;font-size:.95rem;font-weight:600;display:flex;align-items:center;gap:.75rem}
+  .card-header .dot{width:10px;height:10px;border-radius:50%;background:#CC4E10;flex-shrink:0}
+  .card-body{padding:1.25rem}
+  .card-body p,.card-body li{font-size:.92rem;line-height:1.65;color:#333}
+  .card-body ul{padding-left:1.3rem}
+  .card-body li{margin-bottom:.35rem}
+  .grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem;margin-bottom:1.25rem}
+  .grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-bottom:1.25rem}
+  .info-box{background:#fff;border:1px solid #e8e4de;border-radius:12px;overflow:hidden}
+  .info-box .ib-top{background:#CC4E10;height:5px}
+  .info-box .ib-body{padding:1.1rem}
+  .info-box .ib-icon{width:40px;height:40px;border-radius:10px;background:#faece7;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:.75rem}
+  .info-box h4{font-size:.92rem;font-weight:600;color:#1c1c1c;margin-bottom:.5rem}
+  .info-box p{font-size:.85rem;color:#6b6b6b;line-height:1.55}
+  .rule-row{display:flex;align-items:stretch;margin-bottom:.5rem;border-radius:8px;overflow:hidden;border:1px solid #e8e4de}
+  .rule-row .rr-label{background:#CC4E10;color:#fff;font-size:.82rem;font-weight:600;padding:.65rem .9rem;min-width:160px;display:flex;align-items:center}
+  .rule-row .rr-val{background:#fff;padding:.65rem .9rem;font-size:.85rem;color:#333;display:flex;align-items:center;flex:1;flex-wrap:wrap;gap:4px}
+  .alert{background:#fff3ed;border-left:4px solid #CC4E10;border-radius:0 8px 8px 0;padding:.9rem 1.1rem;margin-bottom:1rem;font-size:.9rem;color:#7a2800}
+  .danger{background:#fcebeb;border-left:4px solid #c0392b;border-radius:0 8px 8px 0;padding:.9rem 1.1rem;margin-bottom:.75rem;font-size:.88rem;color:#7b1f1f}
+  .ok-box{background:#eaf3de;border-left:4px solid #1e7b34;border-radius:0 8px 8px 0;padding:.9rem 1.1rem;margin-bottom:.75rem;font-size:.88rem;color:#1e4a24}
+  .info-bar{background:#e6f1fb;border-left:4px solid #185fa5;border-radius:0 8px 8px 0;padding:.9rem 1.1rem;margin-bottom:.75rem;font-size:.88rem;color:#0c447c}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
+  @media(max-width:640px){.two-col{grid-template-columns:1fr}}
+  .tag{display:inline-block;font-size:.75rem;padding:2px 10px;border-radius:20px;margin:2px}
+  .tag.red{background:#fcebeb;color:#a32d2d}
+  .tag.green{background:#eaf3de;color:#1e7b34}
+  .tag.blue{background:#e6f1fb;color:#185fa5}
+  .tag.amber{background:#faeeda;color:#854f0b}
+  .tag.yellow{background:#fffde7;color:#7a5c00;border:1px solid #f0d060}
+  /* Puntos críticos visual */
+  .critico-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem;margin:.75rem 0}
+  .critico-box{border-radius:10px;padding:1rem;text-align:center}
+  .critico-box .ci{font-size:1.8rem;margin-bottom:.4rem}
+  .critico-box h4{font-size:.88rem;font-weight:700;margin-bottom:.3rem}
+  .critico-box p{font-size:.78rem;line-height:1.5}
+  /* Tipos de protección */
+  .tipo-row{display:flex;gap:12px;align-items:flex-start;padding:.75rem;border-radius:8px;margin-bottom:.6rem;background:#f5f3ef;border:1px solid #e8e4de}
+  .tipo-icon{font-size:1.4rem;flex-shrink:0;margin-top:2px}
+  .tipo-body h4{font-size:.9rem;font-weight:600;color:#1c1c1c;margin-bottom:2px}
+  .tipo-body p{font-size:.82rem;color:#6b6b6b;line-height:1.5}
+  /* QUIZ */
+  .q-num{font-size:.8rem;color:#aaa;margin-bottom:.35rem}
+  .q-text{font-size:1rem;font-weight:600;color:#1c1c1c;margin-bottom:1rem}
+  .opt{background:#f5f3ef;border:1px solid #e8e4de;border-radius:8px;padding:.75rem 1rem;margin-bottom:.6rem;cursor:pointer;font-size:.9rem;color:#1c1c1c;transition:all .12s}
+  .opt:hover{background:#faece7;border-color:#CC4E10}
+  .opt.correct{background:#eaf3de;border-color:#1e7b34;color:#1e4a24}
+  .opt.wrong{background:#fcebeb;border-color:#c0392b;color:#7b1f1f}
+  .feedback{font-size:.85rem;margin-top:.75rem;padding:.75rem 1rem;border-radius:8px;display:none}
+  .feedback.ok-f{background:#eaf3de;color:#1e4a24}
+  .feedback.err-f{background:#fcebeb;color:#7b1f1f}
+  .progress-wrap{background:#e8e4de;border-radius:4px;height:5px;margin-bottom:1.25rem;overflow:hidden}
+  .progress-fill{height:100%;background:#CC4E10;transition:width .3s;border-radius:4px}
+  #next-btn{display:none;background:#CC4E10;color:#fff;border:none;border-radius:8px;padding:.6rem 1.4rem;font-size:.9rem;cursor:pointer;margin-top:.75rem}
+  #next-btn:hover{background:#a83d0c}
+  .score-wrap{text-align:center;padding:2rem}
+  .score-wrap .score-icon{font-size:3rem;margin-bottom:.75rem}
+  .score-wrap h3{font-size:1.5rem;font-weight:700}
+  .score-wrap p{margin-top:.5rem}
+  #restart-btn{background:#CC4E10;color:#fff;border:none;border-radius:8px;padding:.65rem 1.6rem;font-size:.9rem;cursor:pointer;margin-top:.75rem}
+  .name-form{margin-bottom:1.5rem}
+  .name-form label{display:block;font-size:.85rem;color:#6b6b6b;margin-bottom:.4rem;font-weight:500}
+  .name-form input{width:100%;max-width:400px;padding:.65rem 1rem;border:1.5px solid #e8e4de;border-radius:8px;font-size:.95rem;font-family:'Segoe UI',Arial,sans-serif;outline:none;transition:border .15s}
+  .name-form input:focus{border-color:#CC4E10}
+  #cert-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:999;align-items:center;justify-content:center;padding:1rem}
+  #cert-overlay.show{display:flex}
+  #cert-box{background:#fff;border-radius:16px;max-width:680px;width:100%;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+  .cert-top{background:#1c1c1c;padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between}
+  .cert-top span{color:#CC4E10;font-weight:700;letter-spacing:1.5px;font-size:.8rem}
+  .cert-top button{background:none;border:none;color:#aaa;font-size:1.4rem;cursor:pointer}
+  .cert-body{padding:2rem 2.5rem;text-align:center}
+  .cert-seal{width:80px;height:80px;border-radius:50%;background:#1c1c1c;border:4px solid #CC4E10;display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 1.25rem}
+  .cert-body h2{font-size:1rem;color:#6b6b6b;font-weight:400;letter-spacing:2px;text-transform:uppercase;margin-bottom:.35rem}
+  .cert-name{font-size:1.5rem;color:#CC4E10;font-weight:700;border-bottom:2px solid #CC4E10;display:inline-block;padding-bottom:4px;margin:1rem 0 .5rem}
+  .cert-meta{display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
+  .cert-meta .cm-val{font-size:1.1rem;font-weight:700;color:#1c1c1c}
+  .cert-meta .cm-lbl{font-size:.75rem;color:#999;margin-top:2px}
+  .cert-divider{border:none;border-top:1px dashed #e8e4de;margin:1.25rem 0}
+  .cert-actions{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+  .cert-actions button{padding:.6rem 1.4rem;border-radius:8px;font-size:.88rem;cursor:pointer;font-family:'Segoe UI',Arial,sans-serif}
+  .btn-print{background:#CC4E10;color:#fff;border:none}
+  .btn-close{background:#fff;color:#1c1c1c;border:1.5px solid #e8e4de}
+  @media print{
+    body>*:not(#cert-overlay){display:none!important}
+    #cert-overlay{display:flex!important;position:static;background:none;padding:0}
+    #cert-box{box-shadow:none;border-radius:0;max-width:100%}
+    .cert-top button,.cert-actions{display:none!important}
+    .cert-top{background:#1c1c1c!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .cert-seal{background:#1c1c1c!important;border-color:#CC4E10!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+  footer{background:#1c1c1c;color:#888;text-align:center;padding:1.5rem;font-size:.8rem}
+  footer strong{color:#CC4E10}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⛏ Capstone Copper · Mantoverde — EPEF N°4 Protecciones de Equipos</h1>
+  <span>CC.MV.GSSO.E004 · v0 · 01/12/2023</span>
+</header>
+
+<div class="hero">
+  <div class="badge">ESTÁNDAR PARA LA ELIMINACIÓN DE FATALIDADES</div>
+  <h2>Protecciones <span>de Equipos</span></h2>
+  <p>Capacitación simplificada para todo el personal y contratistas de Mantoverde</p>
+  <div class="hero-meta">
+    <div><div class="num">4</div><div class="lbl">puntos críticos en máquinas</div></div>
+    <div><div class="num">5</div><div class="lbl">tipos de protecciones</div></div>
+    <div><div class="num">2,10m</div><div class="lbl">altura límite de protección</div></div>
+    <div><div class="num">100%</div><div class="lbl">obligatorio para todos</div></div>
+  </div>
+</div>
+
+<nav class="tabs" id="tabs">
+  <button class="active" onclick="show('intro')">¿De qué trata?</button>
+  <button onclick="show('criticos')">Puntos críticos</button>
+  <button onclick="show('tipos')">Tipos de protección</button>
+  <button onclick="show('reglas')">Reglas clave</button>
+  <button onclick="show('quiz')">Verifica lo aprendido</button>
+</nav>
+
+<!-- ══════════ INTRO ══════════ -->
+<div class="section show" id="s-intro">
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>¿A qué aplica este estándar?</div>
+    <div class="card-body">
+      <p style="margin-bottom:.75rem">Aplica a todas las <strong>partes móviles de plantas, máquinas, equipos y herramientas eléctricas</strong>, equipos móviles, fuentes de alta presión, electricidad, energía calórica y cualquier energía con posibilidad de movimiento, caída o proyección de objetos.</p>
+      <div class="alert"><strong>Obligatorio para todas las empresas y contratistas</strong> que realicen trabajos en áreas de Mantoverde. Donde diga "debe", es una obligación.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Conceptos clave que debes conocer</div>
+    <div class="card-body">
+      <div class="grid-2">
+        <div class="info-box"><div class="ib-top"></div><div class="ib-body"><div class="ib-icon">⚙️</div><h4>Zona / Línea de peligro</h4><p>Zona o punto de contacto peligroso dentro o alrededor de una máquina donde una persona puede entrar en contacto con partes en movimiento. La persona está "en la línea de fuego".</p></div></div>
+        <div class="info-box"><div class="ib-top"></div><div class="ib-body"><div class="ib-icon">📏</div><h4>Distancia de seguridad</h4><p>Distancia mínima que garantiza que no se alcanzará la línea de peligro. Las protecciones deben mantener siempre esta distancia.</p></div></div>
+        <div class="info-box"><div class="ib-top"></div><div class="ib-body"><div class="ib-icon">🛡️</div><h4>Protección para máquinas</h4><p>Barrera o medio que <strong>impide o dificulta</strong> el contacto de personas o partes de su cuerpo con la zona de peligro. Son parte integral de la máquina.</p></div></div>
+        <div class="info-box"><div class="ib-top"></div><div class="ib-body"><div class="ib-icon">🔄</div><h4>Transmisión de fuerza motriz</h4><p>Elementos que transmiten movimiento desde el motor: volantes, engranajes, poleas, correas, cadenas. Todos deben estar protegidos si están a menos de 2,10 m del suelo.</p></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Regla del color amarillo — fundamental en Mantoverde</div>
+    <div class="card-body">
+      <div class="alert">⚠️ <strong>Todas las protecciones de seguridad deben estar pintadas de color AMARILLO.</strong> Además, toda parte de una máquina en movimiento también debe pintarse de amarillo para llamar la atención de las personas cercanas.</div>
+      <p style="font-size:.85rem;color:#6b6b6b">Las cubiertas, rejillas y envolventes deben ser de <strong>material incombustible</strong>, con resistencia mecánica, calórica y química, y sólidamente fijadas.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ PUNTOS CRÍTICOS ══════════ -->
+<div class="section" id="s-criticos">
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Los 4 puntos críticos en máquinas — donde ocurren la mayoría de los accidentes</div>
+    <div class="card-body">
+      <div class="critico-grid">
+        <div class="critico-box" style="background:#faece7">
+          <div class="ci">🔩</div>
+          <h4 style="color:#7a2800">1. Partes salientes</h4>
+          <p style="color:#7a2800">Partes que sobresalen del espacio normal de trabajo (pasillos u otros). Causan lesiones por golpes. Deben protegerse siempre.</p>
+        </div>
+        <div class="critico-box" style="background:#faeeda">
+          <div class="ci">⚙️</div>
+          <h4 style="color:#633806">2. Transmisiones de fuerza</h4>
+          <p style="color:#633806">Correa-polea, piñón-cadena, engranajes, volantes, ejes. Transmiten movimiento desde el motor. Deben cubrirse completamente si están a menos de 2,10 m.</p>
+        </div>
+        <div class="critico-box" style="background:#e6f1fb">
+          <div class="ci">🔄</div>
+          <h4 style="color:#0c447c">3. Partes en movimiento</h4>
+          <p style="color:#0c447c">Partes que giran u oscilan: cabezales móviles, árboles de levas, rodillos. Transfieren la energía desde la transmisión hasta el punto de operación.</p>
+        </div>
+        <div class="critico-box" style="background:#fcebeb">
+          <div class="ci">✂️</div>
+          <h4 style="color:#7b1f1f">4. Punto de operación</h4>
+          <p style="color:#7b1f1f">Donde el material se encuentra con la herramienta: corte, torneado, taladrado, perfilado. Es el punto de mayor riesgo de lesión.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Los 3 tipos de puntos de atrapamiento</div>
+    <div class="card-body">
+      <div class="rule-row"><div class="rr-label">Entre piezas girando en sentido contrario</div><div class="rr-val">Dos cilindros o árboles girando en sentido opuesto crean zonas de aplastamiento y atrapamiento. Ej.: laminadoras, rodillos mezcladores, dobladoras.</div></div>
+      <div class="rule-row"><div class="rr-label">Giratorio vs. desplazamiento tangencial</div><div class="rr-val">Punto de contacto entre correa-polea, cadena-rueda dentada, cinta transportadora-polea. Riesgo de enganche con ropa suelta y atrapamiento.</div></div>
+      <div class="rule-row"><div class="rr-label">Entre pieza giratoria y parte fija</div><div class="rr-val">Aplastamiento, cizallamiento o abrasión entre una pieza que gira y otra fija. Ej.: piedra abrasiva con portaherramientas, mezcladoras con su carcaza.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Altura límite crítica — 2,10 metros</div>
+    <div class="card-body">
+      <div class="info-bar">ℹ️ La altura de <strong>2,10 metros</strong> es el límite universal de este estándar. Todo sistema de transmisión o parte móvil que esté <strong>por debajo de 2,10 m</strong> del suelo o área de trabajo debe estar protegido.</div>
+      <div class="two-col" style="margin-top:.75rem">
+        <div>
+          <strong style="color:#CC4E10;display:block;margin-bottom:.4rem">Por debajo de 2,10 m</strong>
+          <ul>
+            <li>Sistemas de transmisión: protección completa obligatoria</li>
+            <li>Ejes de transmisión aéreos: canaletas de malla de alambre</li>
+            <li>Aspas de ventilador: protección con aperturas máx. 1,25 cm</li>
+            <li>Poleas-correas: totalmente protegidas</li>
+            <li>Engranajes: protección total</li>
+          </ul>
+        </div>
+        <div>
+          <strong style="color:#1e7b34;display:block;margin-bottom:.4rem">Por encima de 2,10 m</strong>
+          <ul>
+            <li>Ejes aéreos: no requieren protección obligatoria</li>
+            <li>Excepción: si la masa del eje es grande, se recomienda proteger igualmente</li>
+            <li>Excepción: si correa supera 9,4 m/seg, proteger hasta la mitad inferior aunque esté sobre 2,10 m</li>
+            <li>Si cruza pasillos: proteger hasta su parte inferior</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ TIPOS ══════════ -->
+<div class="section" id="s-tipos">
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>5 tipos de protecciones — cuál usar según la situación</div>
+    <div class="card-body">
+      <div class="tipo-row">
+        <div class="tipo-icon">🔒</div>
+        <div class="tipo-body">
+          <h4>Protección fija</h4>
+          <p>Permanece siempre cerrada (soldada, remachada o con tornillos que requieren herramienta para abrir). Ideal cuando <strong>no se necesita acceso regular</strong>. Puede ser local, envolvente o distanciadora. Es la opción preferida.</p>
+        </div>
+      </div>
+      <div class="tipo-row">
+        <div class="tipo-icon">🔗</div>
+        <div class="tipo-body">
+          <h4>Protección de enclavamiento</h4>
+          <p>Conectada a un sistema que <strong>detiene la máquina automáticamente</strong> si se abre la protección durante la operación. La máquina no puede funcionar con la protección abierta. Ideal cuando se requiere acceso regular.</p>
+        </div>
+      </div>
+      <div class="tipo-row">
+        <div class="tipo-icon">🚪</div>
+        <div class="tipo-body">
+          <h4>Protección móvil</h4>
+          <p>Unida al bastidor mediante bisagras o guías. Se abre <strong>sin necesidad de herramienta</strong>. Debe impedir el acceso a zonas de peligro cuando está cerrada y garantizar las distancias de seguridad.</p>
+        </div>
+      </div>
+      <div class="tipo-row">
+        <div class="tipo-icon">🔧</div>
+        <div class="tipo-body">
+          <h4>Protección regulable</h4>
+          <p>Fija o móvil con partes que se pueden ajustar. Se usa cuando la zona de peligro <strong>no puede hacerse totalmente inaccesible</strong>. La regulación queda fija durante la operación. Ej.: protección del disco de esmeriladoras, taladros verticales.</p>
+        </div>
+      </div>
+      <div class="tipo-row">
+        <div class="tipo-icon">🔁</div>
+        <div class="tipo-body">
+          <h4>Protección autorregulable</h4>
+          <p>Se abre solo lo necesario para dejar pasar la pieza y <strong>vuelve sola a su posición de cierre</strong> (por gravedad, resorte u otra energía) una vez que la pieza pasa. Ej.: cobertor de sierra circular de mano.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>¿Cuál tipo usar? — Guía rápida de selección</div>
+    <div class="card-body">
+      <div class="rule-row"><div class="rr-label">Transmisión sin acceso regular</div><div class="rr-val"><span class="tag yellow">Protección fija</span></div></div>
+      <div class="rule-row"><div class="rr-label">Transmisión con acceso regular</div><div class="rr-val"><span class="tag amber">Protección móvil con enclavamiento</span></div></div>
+      <div class="rule-row"><div class="rr-label">Parte móvil que puede hacerse inaccesible</div><div class="rr-val"><span class="tag yellow">Fija</span> o <span class="tag amber">Móvil con enclavamiento</span></div></div>
+      <div class="rule-row"><div class="rr-label">Parte móvil que NO puede hacerse inaccesible totalmente</div><div class="rr-val"><span class="tag yellow">Fija + regulable</span> o <span class="tag yellow">Fija + autorregulable</span></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Protecciones específicas por tipo de equipo</div>
+    <div class="card-body">
+      <div class="grid-2">
+        <div><strong style="color:#CC4E10;font-size:.88rem">🔵 Sierras circulares</strong><p style="font-size:.82rem;color:#555;margin-top:4px">Caperuza de protección + discos antiretroceso + separador. Evita que el material se trabe y retroceda hacia el operador.</p></div>
+        <div><strong style="color:#CC4E10;font-size:.88rem">🔵 Esmeriles / Esmeriladoras</strong><p style="font-size:.82rem;color:#555;margin-top:4px">Carcasa que cubre la periferia de la rueda + protector transparente para chispas. El punto de apoyo debe estar siempre en posición correcta.</p></div>
+        <div><strong style="color:#CC4E10;font-size:.88rem">🔵 Rodillos</strong><p style="font-size:.82rem;color:#555;margin-top:4px">Varillas disyuntoras horizontales (protección tipo disyuntor) que al tocar el cuerpo del operador activan el freno instantáneamente.</p></div>
+        <div><strong style="color:#CC4E10;font-size:.88rem">🔵 Prensas</strong><p style="font-size:.82rem;color:#555;margin-top:4px">Protección de compuerta: la máquina no actúa hasta que la protección haya descendido completamente.</p></div>
+        <div><strong style="color:#CC4E10;font-size:.88rem">🔵 Ventiladores</strong><p style="font-size:.82rem;color:#555;margin-top:4px">Si las aspas están a menos de 2,10 m del suelo, protección obligatoria con aperturas máximas de 1,25 cm.</p></div>
+        <div><strong style="color:#CC4E10;font-size:.88rem">🔵 Engranajes</strong><p style="font-size:.82rem;color:#555;margin-top:4px">Siempre protegidos. Si están a 1,50 m o menos del piso: caja hermética. Aberturas de protección máx. 50 mm (2").</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ REGLAS ══════════ -->
+<div class="section" id="s-reglas">
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Características obligatorias de TODA protección</div>
+    <div class="card-body">
+      <div class="two-col">
+        <div>
+          <ul>
+            <li><strong>Efectiva:</strong> debe impedir el acceso de manos, brazos o cualquier parte del cuerpo a la zona de peligro</li>
+            <li><strong>Sin nuevos peligros:</strong> sin bordes filosos, pernos sobresalientes, superficies rugosas ni puntos de corte</li>
+            <li><strong>Resistente:</strong> materiales que soporten el uso, impactos y golpes accidentales</li>
+            <li><strong>Fijada a la máquina:</strong> no debe soltarse con vibraciones ni interferir con partes en movimiento</li>
+          </ul>
+        </div>
+        <div>
+          <ul>
+            <li><strong>Permite mantenimiento:</strong> debe poderse retirar soltando pernos o mariposas para reparar</li>
+            <li><strong>No afecta la operación:</strong> no debe obstruir la producción ni reducir la eficiencia del operador</li>
+            <li><strong>De fácil inspección:</strong> visibles, claramente identificables, diseñadas específicamente para la máquina</li>
+            <li><strong>Amarillo:</strong> pintadas de color amarillo según norma Mantoverde</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Cuándo se puede retirar una protección</div>
+    <div class="card-body">
+      <div class="danger">❌ <strong>NUNCA retirar una protección con la máquina en operación</strong>, salvo bajo procedimiento específico autorizado.</div>
+      <div class="alert">La protección solo puede retirarse para mantenimiento, reparación, limpieza o eliminación de obstrucciones, y <strong>únicamente luego que la planta y equipo hayan sido aislados, bloqueados y probados según el EPEF N°5 (Aislamiento y Bloqueo)</strong>.</div>
+      <div class="ok-box">✅ La protección <strong>debe reponerse antes de que el equipo vuelva a operar</strong>. El Supervisor de mantención es el responsable de verificar este requisito.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Modificación de protecciones y auditorías</div>
+    <div class="card-body">
+      <div class="danger">❌ <strong>Ninguna protección puede ser alterada o modificada</strong> sin pasar por un proceso de Administración del Cambio basado en el riesgo.</div>
+      <p style="margin-top:.75rem;margin-bottom:.75rem;font-size:.9rem">Las auditorías de protecciones deben verificar como mínimo:</p>
+      <ul style="font-size:.88rem;color:#333">
+        <li>Protecciones en todas las áreas críticas: transmisiones, partes en movimiento y puntos de operación</li>
+        <li>Protecciones completas, en buen estado y adecuadas al equipo</li>
+        <li>Revisión "alrededor, debajo, a través y sobre" — ninguna abertura permite introducir manos o dedos</li>
+        <li>Señalización que advierte riesgos de corte, atrapamiento, rotación y aplastamiento</li>
+        <li>Señalización con EPP requerido para cada equipo</li>
+        <li>Botones de paro de emergencia, detectores fotoeléctricos y ultrasónicos en buen estado</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Equipos nuevos y entrenamiento</div>
+    <div class="card-body">
+      <div class="two-col">
+        <div>
+          <h4 style="color:#CC4E10;margin-bottom:.4rem">🆕 Equipos nuevos</h4>
+          <p style="font-size:.85rem;color:#555">Los equipos nuevos deben ser <strong>diseñados para eliminar la necesidad de protecciones</strong> desde el origen. El supervisor que compra el equipo debe exigir al fabricante que cumpla este requisito. La protección se instala solo cuando otras medidas no son suficientes.</p>
+        </div>
+        <div>
+          <h4 style="color:#CC4E10;margin-bottom:.4rem">📚 Entrenamiento</h4>
+          <p style="font-size:.85rem;color:#555">Debe existir un sistema de entrenamiento basado en competencias para el personal de mantención. Mantoverde debe mantener un curso evaluado sobre este estándar para todos los trabajadores nuevos que ingresan a cada operación.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ CERTIFICADO ══════════ -->
+<div id="cert-overlay">
+  <div id="cert-box">
+    <div class="cert-top">
+      <span>CAPSTONE COPPER · MANTOVERDE</span>
+      <button onclick="closeCert()">✕</button>
+    </div>
+    <div class="cert-body">
+      <div class="cert-seal">🏆</div>
+      <h2>Certificado de aprobación</h2>
+      <p style="font-size:.82rem;color:#aaa;margin-bottom:.5rem">Este certificado acredita que</p>
+      <div class="cert-name" id="cert-name-display">—</div>
+      <p style="font-size:.95rem;color:#444;margin-bottom:.25rem">ha completado exitosamente la capacitación</p>
+      <p style="font-size:1.05rem;font-weight:700;color:#1c1c1c;margin:.3rem 0">EPEF N°4 — Protecciones de Equipos</p>
+      <p style="font-size:.82rem;color:#999;margin-bottom:1.25rem">Estándar CC.MV.GSSO.E004 · Capstone Copper / Mantoverde</p>
+      <hr class="cert-divider">
+      <div class="cert-meta">
+        <div><div class="cm-val" id="cert-score">8/8</div><div class="cm-lbl">Nota obtenida</div></div>
+        <div><div class="cm-val" style="color:#1e7b34">100%</div><div class="cm-lbl">Porcentaje</div></div>
+        <div><div class="cm-val" id="cert-date">—</div><div class="cm-lbl">Fecha</div></div>
+      </div>
+      <p style="font-size:.78rem;color:#bbb;margin-bottom:1.25rem">Gerencia Sulfuros — Mantoverde S.A.</p>
+      <div class="cert-actions">
+        <button class="btn-print" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+        <button class="btn-close" onclick="closeCert()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ QUIZ ══════════ -->
+<div class="section" id="s-quiz">
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Antes de comenzar, ingresa tu nombre</div>
+    <div class="card-body">
+      <div class="name-form">
+        <label for="user-name">Nombre completo</label>
+        <input type="text" id="user-name" placeholder="Ej: Juan Pérez González" maxlength="80">
+      </div>
+      <p style="font-size:.82rem;color:#999">Necesario para generar tu certificado si apruebas con 100%.</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Verifica lo que aprendiste — debes responder todo correcto para aprobar</div>
+    <div class="card-body" id="quiz-wrap">
+      <div class="progress-wrap"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+      <div id="q-body"></div>
+    </div>
+    <div class="card-body score-wrap" id="score-wrap" style="display:none">
+      <div class="score-icon" id="score-icon">📖</div>
+      <h3 id="score-title"></h3>
+      <p id="score-sub"></p>
+      <div id="cert-btn-wrap" style="display:none;margin-top:1rem">
+        <button onclick="showCert()" style="background:#1e7b34;color:#fff;border:none;border-radius:8px;padding:.75rem 2rem;font-size:1rem;cursor:pointer;font-weight:600">🏆 Ver mi certificado</button>
+      </div>
+      <button id="restart-btn" onclick="restartQuiz()">Intentar de nuevo</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p><strong>EPEF N°4 — Protecciones de Equipos</strong> · Capstone Copper / Mantoverde · CC.MV.GSSO.E004 · Versión 0 · Vigente desde 01/12/2023</p>
+  <p style="margin-top:.5rem">Elaborado y aprobado por la Gerencia de Seguridad y Salud Ocupacional – Mantoverde S.A.</p>
+</footer>
+
+<script>
+const questions = [
+  {
+    q:"¿De qué color deben estar pintadas las protecciones de seguridad en Mantoverde?",
+    opts:["Rojo","Anaranjado","Amarillo","Gris"],
+    c:2,
+    fb:"Correcto. Todas las protecciones de seguridad y las partes en movimiento de las máquinas deben estar pintadas de color amarillo, para llamar la atención de las personas cercanas."
+  },
+  {
+    q:"¿Cuáles son los 4 puntos críticos en máquinas que generan más accidentes?",
+    opts:["Motor, correa, polea y eje","Partes salientes, transmisiones de fuerza, partes en movimiento y punto de operación","Cabina, frenos, dirección y neumáticos","Engranajes, volantes, rodillos y aspas"],
+    c:1,
+    fb:"Correcto. Los 4 puntos críticos son: partes salientes, transmisiones de fuerza, partes en movimiento y punto de operación. Todos deben estar protegidos."
+  },
+  {
+    q:"¿A qué altura máxima un sistema de transmisión DEBE estar protegido obligatoriamente?",
+    opts:["1,50 metros","1,80 metros","2,10 metros","2,50 metros"],
+    c:2,
+    fb:"Correcto. Todo sistema de transmisión ubicado a menos de 2,10 metros de altura del suelo o área de trabajo debe estar protegido. Esta es la altura límite del estándar."
+  },
+  {
+    q:"¿Cuándo se puede retirar una protección de seguridad?",
+    opts:["Cuando el supervisor lo autorice verbalmente","Cuando la máquina está en baja velocidad","Solo tras aislar, bloquear y probar el equipo según EPEF N°5","En cualquier momento para inspección visual"],
+    c:2,
+    fb:"Correcto. La protección solo puede retirarse para mantenimiento o reparación, y únicamente luego que el equipo haya sido aislado, bloqueado y probado según el EPEF N°5 de Aislamiento y Bloqueo."
+  },
+  {
+    q:"¿Qué tipo de protección detiene automáticamente la máquina si se abre durante la operación?",
+    opts:["Protección fija","Protección de enclavamiento","Protección regulable","Protección autorregulable"],
+    c:1,
+    fb:"Correcto. La protección de enclavamiento lleva un dispositivo que envía una señal de parada inmediata al equipo si la protección se abre estando la máquina en operación. La máquina no puede funcionar con la protección abierta."
+  },
+  {
+    q:"¿Qué ocurre si una protección necesita ser modificada?",
+    opts:["El operador puede modificarla si tiene experiencia","El supervisor puede autorizarla verbalmente","Debe pasar por un proceso formal de Administración del Cambio basado en el riesgo","Se puede modificar durante el turno de mantención"],
+    c:2,
+    fb:"Correcto. Ninguna protección puede ser alterada o modificada sin aplicar el proceso de Administración del Cambio basado en el riesgo de Mantoverde."
+  },
+  {
+    q:"¿Qué tipo de protección es la PRIMERA opción cuando no se requiere acceso regular a la transmisión?",
+    opts:["Protección móvil","Protección regulable","Protección fija","Protección autorregulable"],
+    c:2,
+    fb:"Correcto. La protección fija es la opción preferida cuando no se requiere acceso regular, ya que permanece siempre cerrada y solo puede abrirse con herramienta."
+  },
+  {
+    q:"¿Qué debe incluir la señalización de una máquina, además de las protecciones físicas?",
+    opts:["Solo el número de identificación del equipo","Letreros que adviertan riesgos (corte, atrapamiento, rotación) y señalización del EPP requerido","Solo la fecha de última mantención","Información del fabricante"],
+    c:1,
+    fb:"Correcto. Aunque el equipo tenga protecciones físicas apropiadas, debe tener señales que adviertan los riesgos de corte, atrapamiento, rotación y aplastamiento, además de indicar el EPP requerido."
+  },
+];
+
+let cur=0, score=0, answered=false;
+
+function renderQ() {
+  const q = questions[cur];
+  document.getElementById('prog').style.width = (cur/questions.length*100)+'%';
+  let html = `<div class="q-num">Pregunta ${cur+1} de ${questions.length}</div><div class="q-text">${q.q}</div>`;
+  q.opts.forEach((o,i) => html += `<div class="opt" id="opt${i}" onclick="answer(${i})">${o}</div>`);
+  html += `<div class="feedback" id="fb"></div><button id="next-btn" onclick="nextQ()">${cur===questions.length-1?'Ver resultado':'Siguiente →'}</button>`;
+  document.getElementById('q-body').innerHTML = html;
+  answered = false;
+}
+
+function answer(i) {
+  if(answered) return;
+  answered = true;
+  const q = questions[cur];
+  document.querySelectorAll('.opt').forEach((el,idx) => {
+    el.style.cursor='default';
+    if(idx===q.c) el.classList.add('correct');
+    else if(idx===i&&i!==q.c) el.classList.add('wrong');
+  });
+  const fb = document.getElementById('fb');
+  fb.textContent = q.fb;
+  fb.style.display = 'block';
+  fb.className = 'feedback '+(i===q.c?'ok-f':'err-f');
+  if(i===q.c) score++;
+  document.getElementById('next-btn').style.display='inline-block';
+}
+
+function nextQ() {
+  cur++;
+  if(cur>=questions.length) showResult();
+  else renderQ();
+}
+
+function showResult() {
+  document.getElementById('prog').style.width='100%';
+  document.getElementById('quiz-wrap').style.display='none';
+  const sw = document.getElementById('score-wrap');
+  sw.style.display='block';
+  const total = questions.length;
+  const approved = score===total;
+  document.getElementById('score-icon').textContent = approved?'🏆':'📖';
+  document.getElementById('score-title').textContent = score+' de '+total+' correctas ('+Math.round(score/total*100)+'%)';
+  if(approved){
+    document.getElementById('score-sub').textContent='¡Perfecto! Respondiste todo correcto. Ya puedes obtener tu certificado.';
+    document.getElementById('score-sub').style.color='#1e7b34';
+    document.getElementById('cert-btn-wrap').style.display='block';
+  } else {
+    const wrong=total-score;
+    document.getElementById('score-sub').textContent='Tuviste '+wrong+' error'+(wrong>1?'es':'')+'. Necesitas 100% para aprobar. Revisa el material e intenta de nuevo.';
+    document.getElementById('score-sub').style.color='#c0392b';
+    document.getElementById('cert-btn-wrap').style.display='none';
+  }
+}
+
+function showCert() {
+  const nombre = document.getElementById('user-name').value.trim()||'Participante';
+  const fecha = new Date().toLocaleDateString('es-CL',{day:'2-digit',month:'long',year:'numeric'});
+  document.getElementById('cert-name-display').textContent = nombre;
+  document.getElementById('cert-score').textContent = questions.length+'/'+questions.length;
+  document.getElementById('cert-date').textContent = fecha;
+  document.getElementById('cert-overlay').classList.add('show');
+  document.body.style.overflow='hidden';
+}
+
+function closeCert() {
+  document.getElementById('cert-overlay').classList.remove('show');
+  document.body.style.overflow='';
+}
+
+function restartQuiz() {
+  cur=0; score=0; answered=false;
+  document.getElementById('quiz-wrap').style.display='block';
+  document.getElementById('score-wrap').style.display='none';
+  renderQ();
+}
+
+function show(id) {
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('show'));
+  document.getElementById('s-'+id).classList.add('show');
+  document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.remove('active'));
+  const idx=['intro','criticos','tipos','reglas','quiz'].indexOf(id);
+  document.querySelectorAll('nav.tabs button')[idx].classList.add('active');
+  if(id==='quiz'&&cur===0&&!answered) renderQ();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+document.getElementById('cert-overlay').addEventListener('click',function(e){
+  if(e.target===this) closeCert();
+});
+</script>
+</body>
+</html>
